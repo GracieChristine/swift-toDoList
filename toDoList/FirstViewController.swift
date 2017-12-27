@@ -8,9 +8,10 @@
 
 import UIKit
 
+var list = ["Buy milk", "Run 5 miles", "Get Peter", "Play with Billi", "Plant my new plants"];
+
 class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var list = ["Buy milk", "Run 5 miles", "Get Peter", "Play with Billi", "Plant my new plants"];
     
     @IBOutlet weak var myTableView: UITableView!
     
@@ -25,13 +26,16 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return(cell);
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
-            self.list.remove(at: indexPath.row);
-            myTableView.reloadData()
+            list.remove(at: indexPath.row);
+            myTableView.reloadData();
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        myTableView.reloadData();
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
