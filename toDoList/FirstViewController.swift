@@ -8,13 +8,29 @@
 
 import UIKit
 
-class FirstViewController: UIViewController, {
+var list = ["Buy milk", "Run 5 miles", "Get Peter", "Play with Billi", "Plant my new plants"];
+
+class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var myTableView: UITableView!
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (list.count)
     }
     
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
+        cell.textLabel?.text = list[indexPath.row]
+        
+        return(cell);
+    }
+    
+    public func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.delete {
+            list.remove(at: indexPath.row);
+            myTableView.reloadData();
+        }
+    }
  
     
     override func viewDidLoad() {
